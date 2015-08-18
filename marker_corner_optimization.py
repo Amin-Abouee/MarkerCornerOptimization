@@ -3,20 +3,23 @@ import numpy.linalg
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 import math
+import logging
 
 class MarkerCornerOptimization:
-	def __init__ (self, x, y, length_side):
+	def __init__ (self, x, y, length_side, logger = None):
 		self.x = x
 		self.y = y
 		self.LENGTH_SIDE = length_side
+		self.logger = logger
 
 	def __init__ (self):
 		pass
 
-	def set_parameters (self, x, y, length_side):
+	def set_parameters (self, x, y, length_side, logger = None):
 		self.x = x
 		self.y = y
 		self.LENGTH_SIDE = length_side
+		self.logger = logger
 
 	def cost_fuction (self, c):
 		m0 = ((c[1] - c[0])*(c[2] - c[1]) + (c[5] - c[4])*(c[6] - c[5])) ** 2
@@ -38,10 +41,10 @@ class MarkerCornerOptimization:
 		self.opt_y = res.x[4:]
 
 	def print_result (self):
-		print "INIT X: ", self.x
-		print "INIT Y: ", self.y
-		print "Optimized X: ", self.opt_x[:4]
-		print "Optimized Y: ", self.opt_y[:4]
+		self.logger.info("INIT X: " + str(self.x))
+		self.logger.info("INIT Y: " + str(self.y))
+		self.logger.info("Optimized X: " + str(self.opt_x[:4]))
+		self.logger.info("Optimized Y: " + str(self.opt_y[:4]))
 
 	def draw_graph (self, file_name):
 		fig = plt.figure(figsize = (5,9), dpi = 300)
@@ -50,3 +53,4 @@ class MarkerCornerOptimization:
 		ax.plot(self.opt_x, self.opt_y, "bo")
 		plt.axis("equal")
 		plt.savefig(file_name)
+		self.logger.info("Image saved in" + file_name)
