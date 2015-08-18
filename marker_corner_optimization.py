@@ -10,6 +10,14 @@ class MarkerCornerOptimization:
 		self.y = y
 		self.LENGTH_SIDE = length_side
 
+	def __init__ (self):
+		pass
+
+	def set_parameters (self, x, y, length_side):
+		self.x = x
+		self.y = y
+		self.LENGTH_SIDE = length_side
+
 	def cost_fuction (self, c):
 		m0 = ((c[1] - c[0])*(c[2] - c[1]) + (c[5] - c[4])*(c[6] - c[5])) ** 2
 		m1 = ((c[2] - c[1])*(c[3] - c[2]) + (c[6] - c[5])*(c[7] - c[6])) ** 2
@@ -48,7 +56,9 @@ if __name__ == "__main__":
 	init_x = [599.123, 628.801, 689.092, 658.951]
 	init_y = [446.382, 386.384, 416.144, 476.233]
 	LENGTH_SIDE = 66.931
-	marker_optimizer = MarkerCornerOptimization(init_x, init_y, LENGTH_SIDE)
+	# marker_optimizer = MarkerCornerOptimization(init_x, init_y, LENGTH_SIDE)
+	marker_optimizer = MarkerCornerOptimization()
+	marker_optimizer.set_parameters(init_x, init_y, LENGTH_SIDE)
 	marker_optimizer.optimize()
 	marker_optimizer.print_result()
 	marker_optimizer.draw_graph("out.jpg")
