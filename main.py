@@ -51,4 +51,4 @@ if __name__ == "__main__":
 	# marker_optimizer.set_parameters(x, y, LENGTH_SIDE, logger)
 	# marker_optimizer.optimize()
 	# marker_optimizer.print_result()
-	marker_optimizer.draw_graph("out.jpg")
+	# marker_optimizer.draw_graph("out.jpg")
